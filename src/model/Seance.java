@@ -9,13 +9,10 @@ package model;
  *
  * @author Rasem Laureen Jihane
  */
-public class ProjetCalendrier {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Seance {
+    private Module module;
+    private int n;
+    private int m;
+    private Jour jour;
     
 }
