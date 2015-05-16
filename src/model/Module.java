@@ -22,6 +22,17 @@ public class Module {
     private ArrayList<Seance> seances;
     Formation formation;
 
+    public Module(String v_nom, String v_abrev, int v_nbseance,Formation v_formation) {
+        this.nom = v_nom;
+        this.abrev = v_abrev;
+        //this.couleur = v_couleur;
+         this.nbseancetotal = v_nbseance;
+         this.nbseancedispo=v_nbseance;
+         this.seances=new ArrayList<Seance>();
+         this.formation=v_formation;
+         v_formation.getModules().add(this);
+    }
+    
     public String getNom() {
         return nom;
     }
