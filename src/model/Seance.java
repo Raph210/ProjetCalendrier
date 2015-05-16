@@ -15,4 +15,20 @@ public class Seance {
     private int m;
     private Jour jour;
     
+    public Module getModule() {
+        return module;
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    public int getM() {
+        return m;
+    }
+
+    public Jour getJour() {
+        return jour;
+    }
+    
 }

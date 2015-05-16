@@ -5,10 +5,28 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rasem Laureen Jihane
  */
 public class Formation {
+    private String nom;
+    private int dureeTypeSeance;
+    private ArrayList<Module> modules;
+    
+    
+     public String getNom() {
+        return nom;
+    }
+
+    public int getDureeTypeSeance() {
+        return dureeTypeSeance;
+    }
+
+    public ArrayList<Module> getModules() {
+        return modules;
+    }
     
 }
