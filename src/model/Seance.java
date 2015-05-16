@@ -15,6 +15,13 @@ public class Seance {
     private int m;
     private Jour jour;
     
+     public Seance(Module v_module, int v_n, int v_m, Jour v_jour) {
+        this.n = v_n;
+        this.m = v_m;
+        module = v_module;
+        jour=v_jour;
+    }
+    
     public Module getModule() {
         return module;
     }

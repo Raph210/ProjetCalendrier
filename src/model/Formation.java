@@ -16,6 +16,11 @@ public class Formation {
     private int dureeTypeSeance;
     private ArrayList<Module> modules;
     
+    public Formation(String v_nom,int v_dureeseance) {
+        this.nom=v_nom;
+        this.dureeTypeSeance=v_dureeseance;
+        this.modules=new ArrayList<Module>();
+    }    
     
      public String getNom() {
         return nom;
