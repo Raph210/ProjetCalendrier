@@ -24,7 +24,11 @@ public class Jour {
     private Boolean libre;
     private Seance seance;
 
-     public Jour(Calendar c, int v_semaine_annee, String v_moment) {
+    /**
+     * Constructeur d'un jour. Il initalise une nouvelle journée et vérifie si
+     * la journée est ouvrée ou non
+     */
+    public Jour(Calendar c, int v_semaine_annee, String v_moment) {
         this.jour_mois = c.get(Calendar.DAY_OF_MONTH);
         this.mois = c.get(Calendar.MONTH);
         this.annee = c.get(Calendar.YEAR);
@@ -32,7 +36,7 @@ public class Jour {
         this.semaine_mois = c.get(Calendar.WEEK_OF_MONTH);
         this.semaine_annee = v_semaine_annee;
         this.moment = v_moment;
-        this.libre=true;
+        this.libre = true;
         if (this.jour_semaine == 1 || this.jour_semaine == 7) {
             this.ouvree = false;
         } else {
@@ -40,6 +44,40 @@ public class Jour {
         }
 
     }
+
+    /**
+     * Ajout d'une séance à un jour.
+     * On vérifie si le jour en question est :
+     * libre,ouvree et que des seances sont disponibles à l'affectation.
+     * C'est dans cette méthode que l'appel au constructeur d'une seance est effectué. 
+     * après création d'une seance on l'affecte au jour courant et on met à jour sons statut(libre=false).
+     * 
+     * @param module
+     * afin d'ajouter une nouvelle seance il est necessaire de connaitre le module associé le module est donc le parametre 
+     * si le module a la capacité d'acceuilir une nouvel seance il sera alors possible d'affecter une seance au jour.
+     */
+    public void addSeance(Module module) {//permet d'ajouter une seance à un jour
+        Seance s;
+        int nbseancedispo;
+        if (this.ouvree == true && this.libre == true) {//on verifie que la journée est ouvrée et qu'une seance n'est pas dejà affectée
+            if (module.getNbseancedispo() > 0) {//on vérifie que le nombre de seance proposé par le module n'est pas dépassé
+                s = new Seance(module, module.getSeances().size() + 1, module.getNbseancetotal(), this);//on créé une nouvelle séance
+                module.getSeances().add(s);//on ajoute la seance au module
+                nbseancedispo = module.getNbseancedispo();
+                module.setNbseancedispo(nbseancedispo - 1);//on diminue le nombre de seance dispo
+                this.seance = s; //on enregistre la seance dans la class Jour
+                this.setLibre((Boolean) false); //on met à jour le statut du jour en occupé    
+                System.out.println("Ajout Reussi");
+            } else {
+                System.out.println("Erreur Ajout : Le module ne dispose plus d'assez de seance");
+            }
+
+        } else {
+            System.out.println("Erreur Ajout : Journée non travaillé ou déjà attribué à une séance");
+        }
+
+    }
+
     public int getJour_mois() {
         return jour_mois;
     }
