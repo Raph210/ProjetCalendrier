@@ -84,5 +84,25 @@ public class Calendrier {
     public void setNbjourtotal(int nbjourtotal) {
         this.nbjourtotal = nbjourtotal;
     }
+    
+    /**
+     * Renvoie l'index de l'array list où se trouve un jour du calendrier saisie en paramètre.
+     * Par exemple si l'on veut connaitre l'index ou se trouve la journée du 25 décembre.
+     * Les parametres seront 25 et 12.
+     * @param v_jour le jour souhaité
+     * @param v_mois le mois souhaité
+     */
+    public int getIndexJour(int v_jour, int v_mois) {
+        int i;
+        int res=0;
+        for (i = 0; i < joursAprem.size(); i++) {
+            if ((joursAprem.get(i).getJour_mois() == v_jour) 
+                    && (joursAprem.get(i).getMois() == v_mois-1)
+                    ) {
+                res=i;
+            }
+        }
+        return res;
+    }
 
 }
