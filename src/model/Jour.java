@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Calendar;
+
 /**
  *
  * @author Rasem Laureen Jihane
@@ -22,6 +24,22 @@ public class Jour {
     private Boolean libre;
     private Seance seance;
 
+     public Jour(Calendar c, int v_semaine_annee, String v_moment) {
+        this.jour_mois = c.get(Calendar.DAY_OF_MONTH);
+        this.mois = c.get(Calendar.MONTH);
+        this.annee = c.get(Calendar.YEAR);
+        this.jour_semaine = c.get(Calendar.DAY_OF_WEEK);
+        this.semaine_mois = c.get(Calendar.WEEK_OF_MONTH);
+        this.semaine_annee = v_semaine_annee;
+        this.moment = v_moment;
+        this.libre=true;
+        if (this.jour_semaine == 1 || this.jour_semaine == 7) {
+            this.ouvree = false;
+        } else {
+            this.ouvree = true;
+        }
+
+    }
     public int getJour_mois() {
         return jour_mois;
     }
