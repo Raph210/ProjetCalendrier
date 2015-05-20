@@ -7,6 +7,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -15,8 +16,8 @@ import java.util.Locale;
  */
 public class Calendrier {
 
-    private ArrayList<Jour> joursMatin = new ArrayList<Jour>();
-    private ArrayList<Jour> joursAprem = new ArrayList<Jour>();
+    private HashMap<Integer,ArrayList<Jour>> ListeSemainesMatin = new HashMap<>();
+    private HashMap<Integer,ArrayList<Jour>> ListeSemainesAprem = new HashMap<>();
     private int nbjourtotal = 0;
 
     /**
@@ -34,11 +35,13 @@ public class Calendrier {
      */
     public Calendrier(int annee_saisie) { //
         Jour j1, j2;//Deux jours un pour le matin un pour l'après midi
-        int cpt = 0;
+        int cpt = 1;
         int maxannee;//Variable utilisé pour stopper la boucle de création des jours
         int maxmois = 8;//Variable utilisé pour stopper la boucle de création des jours
         int semaine_annee = 1;//Compteur du nombre de semaine de l'année(Septembre->Aout)   
         boolean start_nbjour = false;
+        ArrayList<Jour> ListejoursMatin = new ArrayList<Jour>();
+        ArrayList<Jour> ListejoursAprem = new ArrayList<Jour>();
 
         Calendar cal = Calendar.getInstance(Locale.FRANCE);//Création d'une var de type Calendar par defaut pointe sur la date actuelle
         cal.set(Calendar.YEAR, annee_saisie); //modification de l'année du calendrier qui pointe desormais sur la date reçu en paramètre       
@@ -49,21 +52,28 @@ public class Calendrier {
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());//On se positionne sur le premier jour de septembre
 
         while (cal.get(Calendar.YEAR) != maxannee || cal.get(Calendar.MONTH) != maxmois) {
-            if (cpt == 7) {//incrémentation du nombre de semaine 
-                semaine_annee += 1;
-                cpt = 0;
-            }
+            
             if ((cal.get(Calendar.DAY_OF_MONTH) == 1)) {
                 start_nbjour = true;
             }
             if (start_nbjour == true) {
                 nbjourtotal += 1;//incrémentation du nombre de jour
             }
+            
             //ajout du jour sur lequel pointe actuelement la var cal(Calendar)
             j1 = new Jour(cal, semaine_annee, "am");//création d'une matinée
             j2 = new Jour(cal, semaine_annee, "pm");//création d'une après midi
-            joursMatin.add(j1);//ajout d'une matinée à la liste des jours
-            joursAprem.add(j2);//ajout d'une après midi à la liste des jours
+            ListejoursMatin.add(j1);//ajout d'une matinée à la liste des jours
+            ListejoursAprem.add(j2);//ajout d'une après midi à la liste des jours
+            
+            if (cpt == 7) {//incrémentation du nombre de semaine 
+                ListeSemainesMatin.put(semaine_annee,ListejoursMatin);
+                ListeSemainesAprem.put(semaine_annee,ListejoursAprem);
+                semaine_annee += 1;
+                cpt = 0;
+                ListejoursMatin = new ArrayList<Jour>();
+                ListejoursAprem = new ArrayList<Jour>();
+            }
             cal.add(Calendar.DATE, 1);//on passe à la journée suivante
             cpt += 1;
         }
@@ -71,18 +81,17 @@ public class Calendrier {
 
     public int getNbjourtotal() {
         return this.nbjourtotal;
-    }
-
-    public ArrayList<Jour> getJoursMatin() {
-        return joursMatin;
-    }
-
-    public ArrayList<Jour> getJoursAprem() {
-        return joursAprem;
-    }
+    }    
 
     public void setNbjourtotal(int nbjourtotal) {
         this.nbjourtotal = nbjourtotal;
+    }
+    public ArrayList<Jour> getSemaineMatin(int v_numsemaine) {
+        return ListeSemainesMatin.get(v_numsemaine);
+    }
+
+    public ArrayList<Jour> getSemaineAprem(int v_numsemaine) {
+        return ListeSemainesAprem.get(v_numsemaine);
     }
     
     /**
@@ -92,7 +101,7 @@ public class Calendrier {
      * @param v_jour le jour souhaité
      * @param v_mois le mois souhaité
      */
-    public int getIndexJour(int v_jour, int v_mois) {
+    /*public int getIndexJour(int v_jour, int v_mois) {
         int i;
         int res=0;
         for (i = 0; i < joursAprem.size(); i++) {
@@ -103,6 +112,6 @@ public class Calendrier {
             }
         }
         return res;
-    }
+    }*/
 
 }

@@ -36,22 +36,20 @@ public class Test_Calendrier {
     @Test
     public void joursOuvre() {
         Calendrier c1 = new Calendrier(2014);
-        int indexjournee;
-        indexjournee = c1.getIndexJour(31, 5);//Le 31/05 est un dimanche donc par defaut non ouvre
-        assertEquals(false, c1.getJoursAprem().get(indexjournee).getOuvree());
-        c1.getJoursAprem().get(indexjournee).setOuvree(true);//On test la possibilité de modifier le statut d'un jour.
-        assertEquals(true, c1.getJoursAprem().get(indexjournee).getOuvree());
+        //On se positionne sur le dimanche de la 1ère semaine (donc par defaut non ouvre)
+        assertEquals(false, c1.getSemaineAprem(1).get(6).getOuvree());
+        c1.getSemaineAprem(1).get(6).setOuvree(true);//On test la possibilité de modifier le statut d'un jour.
+        assertEquals(true, c1.getSemaineAprem(1).get(6).getOuvree());
     }
     @Test
     public void affectationOuvre() {
         Calendrier c1 = new Calendrier(2014);
         Formation f = new Formation("Miage", 3);
         Module m = new Module("Programmtion Interface Java ", "IHM", 2, f);
-        int indexjournee;
-        indexjournee = c1.getIndexJour(31,5);//Le 31/05 est un dimanche donc par defaut non ouvre (false)
-        assertEquals(false, c1.getJoursAprem().get(indexjournee).addSeance(m));
-        indexjournee = c1.getIndexJour(1,6);//Le 1er juin est un lundi donc le jour est ouvree (true)
-        assertEquals(true, c1.getJoursAprem().get(indexjournee).addSeance(m));
+        //On se positionne sur un dimanche donc par defaut non ouvre (false)
+        assertEquals(false, c1.getSemaineAprem(1).get(6).addSeance(m));
+        //On se positionne sur un lundi donc le jour est ouvree(true) par défaut 
+        assertEquals(true, c1.getSemaineAprem(1).get(0).addSeance(m));
     }
 
 }
