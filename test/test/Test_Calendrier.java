@@ -25,7 +25,13 @@ public class Test_Calendrier {
      * Test si le calendrier prend en compte les années bisextiles.
      *
      */
-    @Test
+    @Test //2
+    public void testCreationJours() {
+        Calendrier c1 = new Calendrier(2014);
+        assertEquals(365, c1.getNbjourtotal());
+    }
+    
+    @Test //3
     public void testAnneeBisextile() {
         Calendrier c1 = new Calendrier(2014);//Annee 2014-2015
         Calendrier c2 = new Calendrier(2015);//Annee 2015-2016(2016 Bisextile)
@@ -33,7 +39,7 @@ public class Test_Calendrier {
         assertEquals(366, c2.getNbjourtotal());
     }
 
-    @Test
+    @Test //4 
     public void joursOuvre() {
         Calendrier c1 = new Calendrier(2014);
         //On se positionne sur le dimanche de la 1ère semaine (donc par defaut non ouvre)
@@ -50,6 +56,23 @@ public class Test_Calendrier {
         assertEquals(false, c1.getSemaineAprem(1).get(6).addSeance(m));
         //On se positionne sur un lundi donc le jour est ouvree(true) par défaut 
         assertEquals(true, c1.getSemaineAprem(1).get(0).addSeance(m));
+    }
+    
+    @Test //5
+    public void testModuleCaracteristiques() {
+        Formation f = new Formation("Miage", 3);
+        Module m = new Module("Programmation Interface Java", "IHM", 2, f);
+        assertEquals("Programmation Interface Java",m.getNom());
+        assertEquals("IHM",m.getAbrev());
+        assertEquals(2,m.getNbseancetotal());
+    }
+    @Test //6
+    public void testModuleModification() {
+        Formation f = new Formation("Miage", 3);
+        Module m = new Module("Programmation Interface Java", "IHM", 2, f);
+        assertEquals("Programmation Interface Java",m.getNom());
+        m.setNom("Expression Communication");
+        assertEquals("Expression Communication",m.getNom());
     }
 
 }

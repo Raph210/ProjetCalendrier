@@ -26,7 +26,7 @@ public class Calendrier {
      * Etapes:
      * 1-Initialisation d'une variable de type calendar qui pointera sur la première semaine du mois de septembre
      * 2-cette variable pointera tour à tour sur les jours suivants
-     * 3-Chaques jours sera ajoutés au calendrier
+     * 3-Chaques jours sera ajoutés dans une semaine qui une fois complète sera ensuite ajouté au calendrier
      * 4-la boucle se termine lorsque tous les jours ont été parcourus
      * @param annee_saisie
      * il prend en paramètre une année choisie par l'utilisateur, cette année correspond à l'année de départ du calendrier 
@@ -77,6 +77,8 @@ public class Calendrier {
             cal.add(Calendar.DATE, 1);//on passe à la journée suivante
             cpt += 1;
         }
+    }
+    Calendrier() {
     }
 
     public int getNbjourtotal() {
