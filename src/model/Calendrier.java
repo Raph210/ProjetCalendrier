@@ -5,6 +5,11 @@
  */
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,7 +19,7 @@ import java.util.Locale;
  *
  * @author Rasem Laureen Jihane
  */
-public class Calendrier {
+public class Calendrier implements Serializable{
 
     private HashMap<Integer,ArrayList<Jour>> ListeSemainesMatin = new HashMap<>();
     private HashMap<Integer,ArrayList<Jour>> ListeSemainesAprem = new HashMap<>();
@@ -111,6 +116,17 @@ public class Calendrier {
     public ArrayList<Jour> getSemaineAprem(int v_numsemaine) {
         return ListeSemainesAprem.get(v_numsemaine);
     }
+
+    
+    public void serialiser(String v_chemin)throws FileNotFoundException, IOException {
+        String PATH = "C://Temp//"+v_chemin+".dat";
+    // Flux de communication
+    FileOutputStream fos = new FileOutputStream(PATH);
+    // Branché sur un flux de traitement
+    ObjectOutputStream oos = new ObjectOutputStream(fos);
+    oos.writeObject(this);
+    oos.close();
+  }
     
    
 

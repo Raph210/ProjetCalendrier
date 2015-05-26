@@ -5,12 +5,15 @@
  */
 package test;
 
+import java.io.File;
+import java.io.IOException;
 import model.Calendrier;
 import model.Formation;
 import model.Module;
 import org.junit.Test;
 import org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -73,6 +76,12 @@ public class Test_Calendrier {
         assertEquals("Programmation Interface Java",m.getNom());
         m.setNom("Expression Communication");
         assertEquals("Expression Communication",m.getNom());
+    }
+     @Test
+    public void testSerialiser() throws IOException{
+        Calendrier c1 = new Calendrier(2015);
+        c1.serialiser("c1_save_2015");
+        assertTrue(new File("C:/Temp/c1_save_2015.dat").isFile());  
     }
 
 }

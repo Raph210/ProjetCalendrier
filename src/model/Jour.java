@@ -5,13 +5,16 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *
  * @author Rasem Laureen Jihane
  */
-public class Jour {
+public class Jour implements Serializable {
+    
+    private static final long UID_serial = 1234567891;
 
     private int jour_mois = 0;
     private int jour_semaine;// (1..7) (1=dimanche..7=samedi)
