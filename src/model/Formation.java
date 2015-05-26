@@ -15,7 +15,11 @@ public class Formation {
     private String nom;
     private int dureeTypeSeance;
     private ArrayList<Module> modules;
-    
+    /**
+     * Créer une nouvel foramtion et initialise une liste de module
+     * @param v_nom nom de la formation
+     * @param v_dureeseance duree type des seances de la formation
+     */
     public Formation(String v_nom,int v_dureeseance) {
         this.nom=v_nom;
         this.dureeTypeSeance=v_dureeseance;

@@ -21,7 +21,13 @@ public class Module {
     private int nbseancedispo;
     private ArrayList<Seance> seances;
     Formation formation;
-
+    /**
+     * Va initialiser un nouveau module et l'ajouter à une formation
+     * @param v_nom nom du module
+     * @param v_abrev abreviation du module
+     * @param v_nbseance nbseance possible pour ce module
+     * @param v_formation foramtion lié au module
+     */
     public Module(String v_nom, String v_abrev, int v_nbseance,Formation v_formation) {
         this.nom = v_nom;
         this.abrev = v_abrev;
