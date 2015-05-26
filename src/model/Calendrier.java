@@ -19,6 +19,7 @@ public class Calendrier {
     private HashMap<Integer,ArrayList<Jour>> ListeSemainesMatin = new HashMap<>();
     private HashMap<Integer,ArrayList<Jour>> ListeSemainesAprem = new HashMap<>();
     private int nbjourtotal = 0;
+    private int annee;
 
     /**
      * Constructeur d'un calendrier débutant en septembre et finissant en août.
@@ -36,6 +37,7 @@ public class Calendrier {
     public Calendrier(int annee_saisie) { //
         Jour j1, j2;//Deux jours un pour le matin un pour l'après midi
         int cpt = 1;
+        this.annee=annee_saisie;
         int maxannee;//Variable utilisé pour stopper la boucle de création des jours
         int maxmois = 8;//Variable utilisé pour stopper la boucle de création des jours
         int semaine_annee = 1;//Compteur du nombre de semaine de l'année(Septembre->Aout)   
@@ -79,6 +81,9 @@ public class Calendrier {
         }
     }
     Calendrier() {
+    }
+    public int getAnnee() {
+        return this.annee;
     }
 
     public int getNbjourtotal() {
